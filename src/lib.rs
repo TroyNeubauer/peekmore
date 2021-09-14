@@ -744,6 +744,25 @@ impl<I: Iterator> PeekMoreIterator<I> {
     pub fn peek_amount(&mut self, n: usize) -> &[Option<I::Item>] {
         self.peek_range(0, n)
     }
+
+
+    /// Returns a reference to the iterator inside this peekable iterator
+    #[inline]
+    pub fn inner(&self) -> &I {
+        &self.iterator
+    }
+
+    /// Returns a mutable reference to the iterator inside this peekable iterator
+    #[inline]
+    pub fn inner_mut(&mut self) -> &mut I {
+        &mut self.iterator
+    }
+
+    /// Consumes self and returns the underlying iterator
+    #[inline]
+    pub fn into_inner(self) -> I {
+        self.iterator
+    }
 }
 
 impl<'a, I: Iterator> Iterator for PeekMoreIterator<I> {
